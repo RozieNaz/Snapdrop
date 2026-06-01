@@ -22,6 +22,11 @@ fn capture_fullscreen() -> Result<history::CaptureEntry, String> {
 }
 
 #[tauri::command]
+fn capture_area() -> Result<String, String> {
+    capture::capture_area()
+}
+
+#[tauri::command]
 fn copy_path_to_clipboard(path: String) -> Result<(), String> {
     clipboard::copy_text(&path)
 }
@@ -37,6 +42,7 @@ fn main() {
             app_status,
             list_history,
             capture_fullscreen,
+            capture_area,
             copy_path_to_clipboard,
             open_capture,
         ])
