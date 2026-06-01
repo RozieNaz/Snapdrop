@@ -15,6 +15,15 @@ export default function App() {
       .catch(() => setHistory([]));
   }, []);
 
+  async function handleCapture() {
+    try {
+      const result = await invoke('capture_fullscreen');
+      setStatus(result);
+    } catch {
+      setStatus('Capture failed');
+    }
+  }
+
   return (
     <div className="container">
       <h1>Snapdrop</h1>
@@ -27,7 +36,7 @@ export default function App() {
 
       <div className="card">
         <h2>Capture</h2>
-        <button type="button">Capture full screen</button>
+        <button type="button" onClick={handleCapture}>Capture full screen</button>
       </div>
 
       <div className="card">
