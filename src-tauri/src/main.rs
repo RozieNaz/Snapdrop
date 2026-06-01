@@ -13,9 +13,18 @@ fn list_history() -> Vec<history::CaptureEntry> {
     history::empty_history()
 }
 
+#[tauri::command]
+fn capture_fullscreen() -> Result<String, String> {
+    capture::capture_fullscreen()
+}
+
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![app_status, list_history])
+        .invoke_handler(tauri::generate_handler![
+            app_status,
+            list_history,
+            capture_fullscreen,
+        ])
         .setup(|app| {
             tray::setup_tray(app)?;
             Ok(())
