@@ -12,6 +12,7 @@ dirs = "6"
 screenshots = "0.8"
 arboard = "3"
 open = "5"
+tauri-plugin-global-shortcut = "2"
 
 [build-dependencies]
 tauri-build = { version = "2" }
