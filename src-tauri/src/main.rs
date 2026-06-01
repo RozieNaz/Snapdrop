@@ -9,12 +9,12 @@ fn app_status() -> String {
 }
 
 #[tauri::command]
-fn list_history() -> Vec<history::CaptureEntry> {
-    history::empty_history()
+fn list_history() -> Result<Vec<history::CaptureEntry>, String> {
+    history::list_history()
 }
 
 #[tauri::command]
-fn capture_fullscreen() -> Result<String, String> {
+fn capture_fullscreen() -> Result<history::CaptureEntry, String> {
     capture::capture_fullscreen()
 }
 
