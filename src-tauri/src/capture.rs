@@ -22,12 +22,24 @@ pub fn capture_fullscreen() -> Result<CaptureEntry, String> {
         .capture()
         .map_err(|error| format!("Failed to capture display: {error}"))?;
 
+    save_capture(image, "fullscreen")
+}
+
+pub fn capture_area() -> Result<String, String> {
+    Err(String::from("Area capture UI is not implemented yet"))
+}
+
+fn save_capture(image: screenshots::image::RgbaImage, capture_type: &str) -> Result<CaptureEntry, String> {
     let directory = screenshots_directory()?;
     fs::create_dir_all(&directory)
         .map_err(|error| format!("Failed to create screenshot folder: {error}"))?;
 
     let created_at = Local::now();
-    let file_name = format!("Snapdrop-{}.png", created_at.format("%Y-%m-%d_%H-%M-%S"));
+    let file_name = format!(
+        "Snapdrop-{}-{}.png",
+        capture_type,
+        created_at.format("%Y-%m-%d_%H-%M-%S")
+    );
     let file_path = directory.join(&file_name);
 
     image
