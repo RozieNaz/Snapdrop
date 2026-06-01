@@ -41,6 +41,15 @@ export default function App() {
     }
   }
 
+  async function handleOpen(path) {
+    try {
+      await invoke('open_capture', { path });
+      setStatus('Opened screenshot');
+    } catch {
+      setStatus('Open failed');
+    }
+  }
+
   return (
     <div className="container">
       <h1>Snapdrop</h1>
@@ -62,6 +71,9 @@ export default function App() {
             {history.map((entry) => (
               <li key={entry.file_path}>
                 <span>{entry.file_name}</span>{' '}
+                <button type="button" onClick={() => handleOpen(entry.file_path)}>
+                  Open
+                </button>{' '}
                 <button type="button" onClick={() => handleCopyPath(entry.file_path)}>
                   Copy Path
                 </button>
