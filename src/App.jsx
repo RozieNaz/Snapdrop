@@ -32,6 +32,15 @@ export default function App() {
     }
   }
 
+  async function handleCopyPath(path) {
+    try {
+      await invoke('copy_path_to_clipboard', { path });
+      setStatus('Screenshot path copied to clipboard');
+    } catch {
+      setStatus('Copy failed');
+    }
+  }
+
   return (
     <div className="container">
       <h1>Snapdrop</h1>
@@ -51,7 +60,12 @@ export default function App() {
         ) : (
           <ul>
             {history.map((entry) => (
-              <li key={entry.file_path}>{entry.file_name}</li>
+              <li key={entry.file_path}>
+                <span>{entry.file_name}</span>{' '}
+                <button type="button" onClick={() => handleCopyPath(entry.file_path)}>
+                  Copy Path
+                </button>
+              </li>
             ))}
           </ul>
         )}
