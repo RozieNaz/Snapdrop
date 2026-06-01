@@ -11,6 +11,7 @@ chrono = "0.4"
 dirs = "6"
 screenshots = "0.8"
 arboard = "3"
+open = "5"
 
 [build-dependencies]
 tauri-build = { version = "2" }
