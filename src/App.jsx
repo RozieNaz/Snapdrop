@@ -32,6 +32,16 @@ export default function App() {
     }
   }
 
+  async function handleAreaCapture() {
+    try {
+      const result = await invoke('capture_area');
+      setStatus(result);
+      await loadHistory();
+    } catch (error) {
+      setStatus(String(error));
+    }
+  }
+
   async function handleCopyPath(path) {
     try {
       await invoke('copy_path_to_clipboard', { path });
@@ -59,7 +69,8 @@ export default function App() {
       </div>
 
       <div className="card">
-        <button type="button" onClick={handleCapture}>Capture Full Screen</button>
+        <button type="button" onClick={handleCapture}>Capture Full Screen</button>{' '}
+        <button type="button" onClick={handleAreaCapture}>Capture Area</button>
       </div>
 
       <div className="card">
