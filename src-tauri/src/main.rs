@@ -2,12 +2,13 @@ mod capture;
 mod clipboard;
 mod files;
 mod history;
+mod hotkeys;
 mod settings;
 mod tray;
 
 #[tauri::command]
 fn app_status() -> String {
-    String::from("Snapdrop backend is running")
+    format!("Snapdrop backend is running | {}", hotkeys::shortcut_description())
 }
 
 #[tauri::command]
@@ -41,6 +42,7 @@ fn main() {
         ])
         .setup(|app| {
             tray::setup_tray(app)?;
+            hotkeys::register(app)?;
             Ok(())
         })
         .run(tauri::generate_context!())
