@@ -1,5 +1,6 @@
 mod capture;
 mod clipboard;
+mod files;
 mod history;
 mod settings;
 mod tray;
@@ -24,6 +25,11 @@ fn copy_path_to_clipboard(path: String) -> Result<(), String> {
     clipboard::copy_text(&path)
 }
 
+#[tauri::command]
+fn open_capture(path: String) -> Result<(), String> {
+    files::open_file(&path)
+}
+
 fn main() {
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
@@ -31,6 +37,7 @@ fn main() {
             list_history,
             capture_fullscreen,
             copy_path_to_clipboard,
+            open_capture,
         ])
         .setup(|app| {
             tray::setup_tray(app)?;
