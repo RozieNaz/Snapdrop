@@ -26,7 +26,7 @@ jobs:
         run: npm install
 
       - name: Check Rust backend
-        run: cargo check --manifest-path src-tauri/Cargo.toml
+        run: cargo check --manifest-path src-tauri/Cargo.toml --verbose
 
       - name: Build frontend
         run: npm run build
