@@ -1,5 +1,5 @@
 use crate::capture;
-use tauri::{App, Manager};
+use tauri::App;
 use tauri_plugin_global_shortcut::{Code, GlobalShortcutExt, Modifiers, Shortcut, ShortcutState};
 
 pub const FULLSCREEN_SHORTCUT: &str = "Ctrl+Shift+4";
