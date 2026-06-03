@@ -27,8 +27,15 @@ jobs:
       - name: Install frontend dependencies
         run: npm install
 
-      - name: Check Rust backend
-        run: cargo check --manifest-path src-tauri/Cargo.toml --verbose
+      - name: Build Windows desktop app
+        run: npm run tauri build
 
-      - name: Build frontend
-        run: npm run build
+      - name: Upload Windows installer artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Snapdrop-Windows
+          path: |
+            src-tauri/target/release/bundle/msi/*.msi
+            src-tauri/target/release/bundle/nsis/*.exe
+            src-tauri/target/release/snapdrop.exe
+          if-no-files-found: error
